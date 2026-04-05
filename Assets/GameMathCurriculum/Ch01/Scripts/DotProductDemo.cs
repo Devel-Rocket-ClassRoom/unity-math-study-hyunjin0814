@@ -66,17 +66,26 @@ public class DotProductDemo : MonoBehaviour
 
     private bool CheckInSight(Transform targetTransform)
     {
-        Vector3 toTarget = targetTransform.position - transform.position;
-        if (toTarget.magnitude > viewDistance)
+        // 나로부터 타겟의 방향 벡터
+        Vector3 toTarget = targetTransform.position - transform.position;  
+        
+        // 방향 벡터의 크기 = 거리, 거리가 탐지 거리보다 크면 감지 X 
+        if (toTarget.magnitude > viewDistance)                              
             return false;
 
-        Vector3 toTargetNorm = toTarget.normalized;
+        // (핵심: 정규화된 벡터로만 시야각 로직이 성립함 - 활용할 수식이 분모를 1로 날려야 성립하기 때문)
+        Vector3 toTargetNorm = toTarget.normalized;         
 
-        dotProductValue = Vector3.Dot(transform.forward, toTargetNorm);
+        // 내가 바라보는 방향 벡터와 타겟과의 방향을 내적
+        dotProductValue = Vector3.Dot(transform.forward, toTargetNorm);    
+
+        // 내적한 값은 Cos(θ)값임. 이를 Acos으로 각도를 구함. 이때 반환되는 값이 Radian(예: 2파이) 값이기 때문에 Degree(예 : 60°)로 변환
         angleBetween = Mathf.Acos(dotProductValue) * Mathf.Rad2Deg;
 
+        // 시야각이 120도이면 좌우로 60도만 확인하면 되니 절반 값만 사용하여 60도에 해당하는 Cos(θ) 구함.
         float halfFovCos = Mathf.Cos(fieldOfView * 0.5f * Mathf.Deg2Rad);
 
+        // 60도에 해당하는 Cos(θ)값보다 내적한 Cos(θ)값이 큰지 비교함. (각도가 작을수록 Cos(θ)이 커짐)
         return dotProductValue > halfFovCos;
     }
 

@@ -53,12 +53,20 @@ public class BulletPattern : MonoBehaviour
         for (int i = 0; i < bulletCount; i++)
         {
             // TODO
-            float angleDegree = (i * angleSpacing + currentRotationOffset) % 360;
+            // 총알 개수만큼의 간격에 시간에 따라 스포너의 회전 오프셋을 더함
+            float angleDegree = (i * angleSpacing + currentRotationOffset) % 360;   
+
+            // Mathf.Cos, Mathf.Sin 사용을 위해 Degree값을 Radian으로 변환
             float angleRadian = angleDegree * Mathf.Deg2Rad;
 
+            // X Z 평면에서 단위원의 원리인 (Cos(θ), Sin(θ))로 y값에 0을 넣어 바닥과 수평인 정규화된 벡터를 얻음
             Vector3 direction = new Vector3(Mathf.Cos(angleRadian), 0f, Mathf.Sin(angleRadian)).normalized;
+
+            // 총알 프리팹들을 스포너에서 생성
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            // 위에서 구한 방향에 속도를 곱해서 발사함
             rb.linearVelocity = direction * bulletSpeed;
 
             Destroy(bullet, bulletLifetime);

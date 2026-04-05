@@ -60,18 +60,22 @@ public class Assignment_LissajousCurve : MonoBehaviour
 
     private Vector3 CalculateLissajousPosition(float time)
     {
-        // 리사주 곡선 (Lissajous Curve) 공식:
-        //   x(t) = Ax × sin(2π × fx × t + φx)
-        //   z(t) = Az × sin(2π × fz × t + φz)
-        //
-        // Ax, Az = 진폭 (amplitudeX, amplitudeZ)
-        // fx, fz = 주파수 (frequencyX, frequencyZ)
-        // φx, φz = 위상 (phaseX, phaseZ) — 도(degree) → 라디안 변환 필요
-        //
-        // initialPosition을 기준으로 X, Z 오프셋을 더해 최종 위치를 반환하세요.
+        // Degree(위상)을 Radian으로 변환
+        float phaseXRadian = phaseX * Mathf.Deg2Rad;
+        float phaseZRadian = phaseZ * Mathf.Deg2Rad;
 
-        // TODO: 위 공식을 구현하세요
-        return initialPosition;
+        // 리사주 곡선 공식 적용 (x = Ax * sin(2π * fx * t + φx))
+        float xOffset = amplitudeX * Mathf.Sin(2f * Mathf.PI * frequencyX * time + phaseXRadian);
+
+        // 리사주 곡선 공식 적용 (z = Az * sin(2π * fz * t + φz))
+        float zOffset = amplitudeZ * Mathf.Sin(2f * Mathf.PI * frequencyZ * time + phaseZRadian);
+
+        // 초기 위치(initialPosition)를 기준으로 계산된 오프셋을 더함
+        Vector3 newPosition = initialPosition;
+        newPosition.x += xOffset;
+        newPosition.z += zOffset;
+
+        return newPosition;
     }
 
     private void UpdateDebugUI()

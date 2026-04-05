@@ -86,20 +86,45 @@ public class Assignment_BulletHell : MonoBehaviour
 
     private Vector3 CalculateCircleDirection(int index, int total)
     {
-        // TODO
-        return Vector3.forward;
+        // 각 총알의 간격을 계산 (% 360은 없어도 당장 동작에는 문제가 없음. 나중에 코드가 복잡해질 때를 대비한 안전 장치임. 습관화 하면 좋음.)
+        float angleDegree = index * (360f / total) % 360;
+
+        float angleRadian = angleDegree * Mathf.Deg2Rad;
+
+        // Cos은 X축, Sin은 Z축에 대입하여 방향 벡터 생성
+        return new Vector3(Mathf.Cos(angleRadian), 0f, Mathf.Sin(angleRadian));
     }
 
     private Vector3 CalculateSpiralDirection(int index, int total)
     {
-        // TODO
-        return Vector3.forward;
+        
+        float angleDegree = index * (360f / total) % 360;
+
+        // spiralTurnSpeed가 (라디안/초)이므로 Degree 값으로 변환
+        float rotationOffsetDegree = (Time.time * spiralTurnSpeed) * Mathf.Rad2Deg;
+
+        // 360으로 나눈 나머지 값은 Degree, Radian으로 변환
+        float finalAngle = (angleDegree + rotationOffsetDegree) % 360 * Mathf.Deg2Rad;
+
+        // CalculateCircleDirection에서 회전이 추가된 방향 벡터 생성
+        return new Vector3(Mathf.Cos(finalAngle), 0f, Mathf.Sin(finalAngle));
     }
 
     private Vector3 CalculateFanDirection(int index, int total)
     {
-        // TODO
-        return Vector3.forward;
+        // 부채꼴의 Degree(도)를 라디안으로 변환
+        float fanRadian = fanAngle * Mathf.Deg2Rad;
+
+        // 시작 각도 설정 (유니티에서 Z축 정면은 1/2 * pi) 정면에서 부채꼴 너비의 절반만큼 뺀 곳에서부터 발사 시작
+        float startAngle = (Mathf.PI * 0.5f) - (fanRadian * 0.5f);
+
+        // 탄알 사이의 간격 계산 (첫 발은 startAngle에서 발사), 나눗셈 예외 방지
+        float angleStep = (total > 1) ? fanRadian / (total - 1) : 0f;
+
+        // 최종 각도 계산
+        float finalAngle = startAngle + (index * angleStep);
+
+        return new Vector3(Mathf.Cos(finalAngle), 0f, Mathf.Sin(finalAngle));
     }
     
     private void UpdateDebugUI()

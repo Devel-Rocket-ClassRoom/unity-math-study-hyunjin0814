@@ -59,24 +59,36 @@ public class CrossProductDemo : MonoBehaviour
     private string CheckLeftOrRight(Transform targetTransform)
     {
         // TODO
+        // 나로부터 타겟을 향한 방향 벡터
         Vector3 toTarget = targetTransform.position - transform.position;
-        toTarget.y = 0f; // y는 0으로 맞춰줘야 외적으로 방향을 찾는게 성립함
+
+        // y는 0으로 맞춰줘야 외적으로 방향을 찾는게 성립함
+        toTarget.y = 0f;
+
+        // 정규화하여 사용
         toTarget = toTarget.normalized;
 
+        // 외적
         crossProduct = Vector3.Cross(transform.forward, toTarget); // 매개변수 순서 중요 (나로부터 타겟)
+        
+        // X Z 평면을 기준으로 두 방향 벡터를 직교하는 y축 값
         crossY = crossProduct.y;
 
-        float threshold = 0.1f; 
+        // 임계값
+        float threshold = 0.7f; 
 
+        // 45도 정도 벌어지면 오른쪽
         if (crossY > threshold)
         {
             return "오른쪽";
         }
+        // 45도 정도 벌어지면 왼쪽
         else if (crossY < -threshold)
         {
             return "왼쪽";
         }
 
+        // 임계값에 걸리지 않으면 전/후면
         return "정면/후면";
     }
 

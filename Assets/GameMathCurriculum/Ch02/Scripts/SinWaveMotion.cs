@@ -37,10 +37,18 @@ public class SinWaveMotion : MonoBehaviour
     private void Update()
     {
         // TODO
+        // 인스펙터에서 설정하는 Degree(도)를 Radian으로 변환
         float phaseRadians = phase * Mathf.Deg2Rad;
+
+        // 경과 시간에 주파수를 곱함. 주파수가 높을수록 진동을 빠르게 함
         float timeInCycle = Time.time * frequency;
+
+        // 사인 파동 공식 - 주파수 * sin(2πft + φ)
         currentOffset = amplitude * Mathf.Sin(2f * Mathf.PI * timeInCycle + phaseRadians);
+
         Vector3 newPosition = startPosition;
+        
+        // 선택된 축에 진동 오프셋 적용
         switch (motionAxis)
         {
             case MotionAxis.X:
@@ -54,6 +62,7 @@ public class SinWaveMotion : MonoBehaviour
                 break;
         }
 
+        // 계산된 최종 위치 적용
         transform.localPosition = newPosition;
         UpdateUI();
     }

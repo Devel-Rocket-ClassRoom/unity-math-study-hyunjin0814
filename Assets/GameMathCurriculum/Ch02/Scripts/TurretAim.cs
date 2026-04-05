@@ -48,7 +48,11 @@ public class TurretAim : MonoBehaviour
         }
 
         directionToTarget.Normalize();
+
+        // 타겟이 있는 위치까지의 각도를 구함
         targetAngleRadians = Mathf.Atan2(directionToTarget.z, directionToTarget.x);
+        
+        // Radian을 Degree로 변환
         targetAngleDegrees = targetAngleRadians * Mathf.Rad2Deg;
 
         RotateTowardTarget();
@@ -58,8 +62,10 @@ public class TurretAim : MonoBehaviour
     private void RotateTowardTarget()
     {
         // TODO
+        // Degree(도) 단위를 오일러 각도로 변환 (y축이 회전해야 오브젝트가 고개를 돌리는 것처럼 돌아감)
         Quaternion targetQuaternion = Quaternion.Euler(0f, 90f - targetAngleDegrees, 0f);
 
+        // deltaTime에 따라서 자연스럽게 회전
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetQuaternion, rotationSpeed * Time.deltaTime);
     }
 
