@@ -98,6 +98,11 @@ public class Assignment_DropTable : MonoBehaviour
 
         dropHistory.Insert(0, lastSelectedIndex);
 
+        if (dropHistory.Count > MAX_HISTORY)
+        {
+            dropHistory.RemoveAt(MAX_HISTORY);
+        }
+
         UpdateUI();
     }
 
