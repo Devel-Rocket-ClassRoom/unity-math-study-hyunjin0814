@@ -142,6 +142,25 @@ public static class VectorGizmoHelper
         Gizmos.color = prevColor;
     }
 
+    //public static void DrawCircleXZ(Vector3 center, float radius, Color color, int segments = 32)
+    //{
+    //    Color prevColor = Gizmos.color;
+    //    Gizmos.color = color;
+
+    //    float step = 360f / segments;
+    //    Vector3 prevPoint = center + new Vector3(radius, 0f, 0f);
+
+    //    for (int i = 1; i <= segments; i++)
+    //    {
+    //        float angle = step * i * Mathf.Deg2Rad;
+    //        Vector3 nextPoint = center + new Vector3(Mathf.Cos(angle) * radius, 0f, Mathf.Sin(angle) * radius);
+    //        Gizmos.DrawLine(prevPoint, nextPoint);
+    //        prevPoint = nextPoint;
+    //    }
+
+    //    Gizmos.color = prevColor;
+    //}
+
     // =========================================================================
     // 텍스트 라벨 (씬 뷰 전용)
     // =========================================================================
