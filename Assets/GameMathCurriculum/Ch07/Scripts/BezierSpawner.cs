@@ -8,15 +8,16 @@ public class BezierSpawner : MonoBehaviour
     private Transform endPoint;
     [SerializeField]
     private GameObject spherePrefab;
+    private bool isShoot;
 
-    private bool shoot;
     void Update()
     {
-        shoot = Input.GetKeyDown(KeyCode.Space);
+        isShoot = Input.GetKeyDown(KeyCode.Space);
 
-        if (shoot)
+        if (isShoot)
         {
             int randomCount = Random.Range(3, 7);
+
             for (int i = 0; i < randomCount; i++)
             {
                 GameObject go = Instantiate(spherePrefab);

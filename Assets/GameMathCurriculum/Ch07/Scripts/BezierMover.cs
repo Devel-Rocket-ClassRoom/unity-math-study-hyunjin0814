@@ -7,8 +7,9 @@ public class BezierMover : MonoBehaviour
     private Vector3 rand1;
     private Vector3 rand2;
 
+    [SerializeField]
+    private float duration;
     private float elapsedTime;
-    public float duration = 5f;
     private bool isInitialized = false;
 
     public void Initialize(Vector3 start, Vector3 end)
@@ -19,14 +20,14 @@ public class BezierMover : MonoBehaviour
         Vector3 randBase1 = Vector3.Lerp(startPoint, endPoint, Random.Range(0.1f, 0.4f));
         Vector3 randBase2 = Vector3.Lerp(startPoint, endPoint, Random.Range(0.6f, 0.9f));
 
-        rand1 = randBase1 + Random.insideUnitSphere * 3f;
-        rand2 = randBase2 + Random.insideUnitSphere * 3f;
+        rand1 = randBase1 + Random.insideUnitSphere * 2f;
+        rand2 = randBase2 + Random.insideUnitSphere * 2f;
 
         elapsedTime = 0f;
         duration = Random.Range(0.5f, 2.5f);
 
         Renderer sphereRenderer = GetComponent<Renderer>();
-        sphereRenderer.material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        sphereRenderer.material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);  //  Random.ColorHSV(색상 최소값, 색상 최대값, 채도 최소값, 채도 최대값, 명도 최소값, 명도 최대값)
 
         isInitialized = true;
     }
@@ -48,6 +49,7 @@ public class BezierMover : MonoBehaviour
         }
     }
 
+    // 삼차 배지어
     Vector3 CubicBezier(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
     {
         Vector3 a = Vector3.Lerp(p0, p1, t);

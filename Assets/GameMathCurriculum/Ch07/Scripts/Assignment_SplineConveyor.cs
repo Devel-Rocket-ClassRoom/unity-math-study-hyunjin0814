@@ -35,6 +35,8 @@ public class Assignment_SplineConveyor : MonoBehaviour
     private void Update()
     {
         // TODO
+
+        // 현재 진행률에 맞는 speedCurve 가중치를 가져옴
         float speed = speedCurve.Evaluate(globalT);
         globalT += (1f / cycleDuration) * speed * Time.deltaTime;
         globalT = Mathf.Repeat(globalT, 1f);
@@ -55,15 +57,22 @@ public class Assignment_SplineConveyor : MonoBehaviour
 
     private Vector3 EvaluateSpline(Transform[] pts, float t)
     {
+        // 웨이포인트가 5개면 구간(길)은 4개
         int segmentCount = pts.Length - 1;
+
+        // 현재 진행률이 어느 구간에 속하는지 계산 (예: 1.5는 두 번째 구간을 지나는 중임. 0~1: 첫 번째 구간, 1~2: 두 번째 구간)
         float scaledT = t * segmentCount;
+
+        // 현재 구간에서 소수점을 버린 값 (예: 1.5의 값을 1로 변환)
         int segment = Mathf.Clamp((int)scaledT, 0, segmentCount - 1);
+
+        // (1.5 - 1 = 0.5, 현재 두 번째 구간을 지나는데, 그 구간에서의 진행률이 0.5임)
         float localT = scaledT - segment;
 
-        Vector3 p0 = pts[Mathf.Max(0, segment - 1)].position;
-        Vector3 p1 = pts[segment].position;
-        Vector3 p2 = pts[Mathf.Min(pts.Length - 1, segment + 1)].position;
-        Vector3 p3 = pts[Mathf.Min(pts.Length - 1, segment + 2)].position;
+        Vector3 p0 = pts[Mathf.Max(0, segment - 1)].position;                   // 현재 구간 이전의 점
+        Vector3 p1 = pts[segment].position;                                     // 현재 구간 시작점
+        Vector3 p2 = pts[Mathf.Min(pts.Length - 1, segment + 1)].position;      // 현재 구간의 끝점
+        Vector3 p3 = pts[Mathf.Min(pts.Length - 1, segment + 2)].position;      // 다음 구간의 끝점
 
         return CatmullRom(p0, p1, p2, p3, localT);
     }
