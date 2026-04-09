@@ -37,6 +37,7 @@ public class Assignment_SplineConveyor : MonoBehaviour
         // TODO
 
         // 현재 진행률에 맞는 speedCurve 가중치를 가져옴
+        // speed가 0에 수렴할 때 멈추는 현상 발생 가능성 있음
         float speed = speedCurve.Evaluate(globalT);
         globalT += (1f / cycleDuration) * speed * Time.deltaTime;
         globalT = Mathf.Repeat(globalT, 1f);
