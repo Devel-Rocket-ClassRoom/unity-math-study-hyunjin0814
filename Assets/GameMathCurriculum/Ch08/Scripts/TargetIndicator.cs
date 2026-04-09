@@ -21,7 +21,7 @@ public class TargetIndicator : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (target == null)
         {
@@ -58,10 +58,7 @@ public class TargetIndicator : MonoBehaviour
             // 뒤쪽 타겟이면 좌표 반전 처리
             if (targetPos.z < 0)
             {
-                Vector3 screenCenter = new Vector3(screenWidth, screenHeight, 0f) * 0.5f;
-                targetPos -= screenCenter;
                 targetPos *= -1f;
-                targetPos += screenCenter;
             }
             // Mathf.Clamp로 화면 테두리에 고정
             float x = Mathf.Clamp(targetPos.x, margin, screenWidth - margin);
