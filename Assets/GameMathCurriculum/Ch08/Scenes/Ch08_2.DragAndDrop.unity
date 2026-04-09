@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 575544736}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: DropZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -352,8 +352,8 @@ Transform:
   m_GameObject: {fileID: 575544735}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 540.3, y: 145.5, z: 392.4}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalPosition: {x: 536.7, y: 153.5, z: 376.5}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -464,7 +464,7 @@ Transform:
   m_GameObject: {fileID: 758821753}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 154, z: 330.4}
+  m_LocalPosition: {x: 500, y: 154.88, z: 330.4}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 932067101}
   - component: {fileID: 932067100}
   - component: {fileID: 932067099}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +577,7 @@ GameObject:
   - component: {fileID: 977926578}
   m_Layer: 0
   m_Name: Sphere (1)
-  m_TagString: Untagged
+  m_TagString: DropZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -669,8 +669,8 @@ Transform:
   m_GameObject: {fileID: 977926577}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 540.3, y: 133.1, z: 323.2}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalPosition: {x: 531.3, y: 150.5, z: 330.02}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -781,7 +781,7 @@ Transform:
   m_GameObject: {fileID: 1481330096}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 499.7, y: 159.3, z: 346.9}
+  m_LocalPosition: {x: 499.7, y: 162.67, z: 346.9}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 1505540747}
   m_Layer: 0
   m_Name: Sphere (2)
-  m_TagString: Untagged
+  m_TagString: DropZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -893,8 +893,8 @@ Transform:
   m_GameObject: {fileID: 1505540746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 540.3, y: 142.7, z: 357.8}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalPosition: {x: 546.5, y: 152.1, z: 358.7}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1005,7 +1005,7 @@ Transform:
   m_GameObject: {fileID: 1679803219}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 499.6, y: 162, z: 363.2}
+  m_LocalPosition: {x: 499.6, y: 165.44, z: 363.2}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1023,6 +1023,7 @@ GameObject:
   - component: {fileID: 1855420097}
   - component: {fileID: 1855420096}
   - component: {fileID: 1855420099}
+  - component: {fileID: 1855420100}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1148,6 +1149,24 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1855420100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855420095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14338260d320e0a48ada4b19adfac118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragAndDrop
+  yOffset: 2.5
+  returnSpeed: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  dropZoneTag: DropZone
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

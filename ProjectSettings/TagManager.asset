@@ -11,11 +11,12 @@ TagManager:
   - Unit
   - Ground
   - Draggable
+  - DropZone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
