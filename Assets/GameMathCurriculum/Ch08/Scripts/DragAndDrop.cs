@@ -32,6 +32,7 @@ public class DragAndDrop : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && isDragging) DropObject();
     }
 
+    // 태그로 드래그할 게임 오브젝트를 찾음
     void TryPickObject()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -46,11 +47,14 @@ public class DragAndDrop : MonoBehaviour
         }
     }
 
+    // 드래그중인 게임 오브젝트를 움직임
     void DragObject()
     {
         if (selectedObject == null) return;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        // 레이어를 통해서 바닥을 감지
         if (Physics.Raycast(ray, out RaycastHit hit, 200f, groundLayer))
         {
             Vector3 targetPos = hit.point;
@@ -64,6 +68,7 @@ public class DragAndDrop : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
+            // 태그로 드롭존을 감지
             if (hit.collider.CompareTag(dropZoneTag))
             {
                 selectedObject.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y + yOffset, hit.transform.position.z);
@@ -96,6 +101,7 @@ public class DragAndDrop : MonoBehaviour
         selectedObject.transform.position = nextPos;
 
         // 도착했을 때 y좌표 차이로 인해 거리를 이용한 도착 여부 판단이 어려워 XZ 평면에서의 거리 차이로 계산
+        // 기존 오브젝트의 위치를 정확하게 조정하면 단순하게 거리 차이만 계산해도 되지만 버그 방지
         Vector2 currentXZ = new Vector2(selectedObject.transform.position.x, selectedObject.transform.position.z);
         Vector2 targetXZ = new Vector2(startPosition.x, startPosition.z);
 

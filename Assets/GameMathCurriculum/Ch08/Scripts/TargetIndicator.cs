@@ -23,18 +23,6 @@ public class TargetIndicator : MonoBehaviour
 
     void LateUpdate()
     {
-        if (target == null)
-        {
-            Debug.LogError($"{gameObject.name}의 TargetIndicator에 타겟이 없습니다!");
-            return;
-        }
-
-        // 2. 카메라가 없는 경우 체크
-        if (cam == null)
-        {
-            Debug.LogError($"{gameObject.name}의 cma 타겟이 없습니다!");
-        }
-
         screenWidth = Screen.width;
         screenHeight = Screen.height;
 

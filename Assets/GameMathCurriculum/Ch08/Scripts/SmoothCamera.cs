@@ -16,7 +16,7 @@ public class SmoothCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 targetPos = target.TransformPoint(offset);
+        Vector3 targetPos = target.TransformPoint(offset);  // 플레이어의 로컬 회전축을 기준으로 offset만큼 떨어진 월드 좌표 Vector3 반환
         transform.position = Vector3.SmoothDamp(
             transform.position,
             targetPos,
