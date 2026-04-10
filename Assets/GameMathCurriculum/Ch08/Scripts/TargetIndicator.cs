@@ -37,22 +37,35 @@ public class TargetIndicator : MonoBehaviour
         }
         else
         {
-            // UI 이미지 활성화
+            //// UI 이미지 활성화
+            //if (!uiImage.enabled)
+            //{
+            //    uiImage.enabled = true;
+
+            //}
+            //// 뒤쪽 타겟이면 좌표 반전 처리
+            //if (targetPos.z < 0)
+            //{
+            //    targetPos *= -1f;
+            //}
+            //// Mathf.Clamp로 화면 테두리에 고정
+            //float x = Mathf.Clamp(targetPos.x, margin, screenWidth - margin);
+            //float y = Mathf.Clamp(targetPos.y, margin, screenHeight - margin);
+            //// RectTransform 위치 업데이트
+            //rectTransform.position = new Vector3(x, y, 0f);
+
             if (!uiImage.enabled)
             {
                 uiImage.enabled = true;
 
             }
-            // 뒤쪽 타겟이면 좌표 반전 처리
-            if (targetPos.z < 0)
-            {
-                targetPos *= -1f;
-            }
-            // Mathf.Clamp로 화면 테두리에 고정
-            float x = Mathf.Clamp(targetPos.x, margin, screenWidth - margin);
-            float y = Mathf.Clamp(targetPos.y, margin, screenHeight - margin);
-            // RectTransform 위치 업데이트
-            rectTransform.position = new Vector3(x, y, 0f);
+
+            Vector3 local = cam.transform.InverseTransformPoint(target.position);
+            Vector2 dir = new Vector2(local.x, local.y).normalized;
+            Vector2 center = new Vector2(screenWidth * 0.5f, screenHeight * 0.5f);
+            float scale = Mathf.Min(center.x / Mathf.Abs(dir.x), center.y / Mathf.Abs(dir.y));
+            Vector2 pos = center + dir * scale;
+            rectTransform.position = new Vector3(pos.x, pos.y, 0f);
         }
     }
 }

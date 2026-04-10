@@ -113,3 +113,9 @@ public class DragAndDrop : MonoBehaviour
         }
     }
 }
+
+/* 최초 클릭에 큐브인지 체크
+ * 클릭하면 드래그 상태로 변경, 돌아갈 위치 저장
+ * 클릭 중에 그라운드를 raycast 해서 ground를 따라다니게 함
+ * 드래그가 끝났을 때, 드롭존인지 ray를 통해 판단
+ */ 
